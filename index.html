@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <link rel="stylesheet" href="./dist/main.css"> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- <script type="module" src="./js/app.js"></script> -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700,900&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="wrapper" id="app">
+        <div class="content">
+            <section class="content__horisontal">
+                <div class="rooms">
+
+                    <div id="rooms__wrapper" class="rooms__wrapper">
+                        <!-- <room-item/> -->
+                        <div class="room" v-for="(item, index) in listRooms" :key="index">
+                            <div class="room__img"><img src="http://hai-nyzhnyk.in.ua/test/room.png" alt=""></div>
+                            <div class="room__info">
+                                <div class="room__title">Room {{item.number}}</div>
+                                <div class="room__description">{{item.description()}}</div>
+                                <div class="room__area"><strong>area:</strong> {{item.area}} m<sup>2</sup></div>
+                                <div class="room__levels"><strong>levels:</strong> {{item.levels}}</div>
+                                <div class="room__floor" v-if="isFloor()"><strong>floor:</strong> {{item.floor()}}</div>
+                                <div class="room__type" :class="(item.type == 'office') ? 'office-class' : ''">item.type</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <section class="content__vertical">
+
+                <header>
+                    <h1>Rooms</h1>
+                    <hr>
+                    <div class="search">
+                        <input type="search" id="site-search" name="q" aria-label="Search through site content" placeholder="Search">
+                    </div>
+
+                </header>
+
+                <div class="rooms">
+                    <div class="room" v-for="(item, index) in listRooms" :key="index">
+                        <div class="room__img"><img src="http://hai-nyzhnyk.in.ua/test/room.png" alt=""></div>
+                        <div class="room__info">
+                            <div class="room__title">Room {{item.number}}</div>
+                            <div class="room__description">{{item.description()}}</div>
+                            <div class="room__area"><strong>area:</strong> {{item.area}} m<sup>2</sup></div>
+                            <div class="room__levels"><strong>levels:</strong> {{item.levels}}</div>
+                            <div class="room__floor" v-if="isFloor()"><strong>floor:</strong> {{item.floor()}}</div>
+                            <div class="room__type" :class="(item.type == 'office') ? 'office-class' : ''">item.type</div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+    </div>
+</body>
+
+</html>
