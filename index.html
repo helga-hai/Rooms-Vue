@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- <link rel="stylesheet" href="./dist/main.css"> -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <!-- <script type="module" src="./js/app.js"></script> -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700,900&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
@@ -17,21 +15,19 @@
         <div class="content">
             <section class="content__horisontal">
                 <div class="rooms">
-
-                    <div id="rooms__wrapper" class="rooms__wrapper">
-                        <!-- <room-item/> -->
+ 
                         <div class="room" v-for="(item, index) in listRooms" :key="index">
                             <div class="room__img"><img src="http://hai-nyzhnyk.in.ua/test/room.png" alt=""></div>
                             <div class="room__info">
                                 <div class="room__title">Room {{item.number}}</div>
-                                <div class="room__description">{{item.description()}}</div>
+                                <div class="room__description">{{item.description}}</div>
                                 <div class="room__area"><strong>area:</strong> {{item.area}} m<sup>2</sup></div>
-                                <div class="room__levels"><strong>levels:</strong> {{item.levels}}</div>
-                                <div class="room__floor" v-if="isFloor()"><strong>floor:</strong> {{item.floor()}}</div>
-                                <div class="room__type" :class="(item.type == 'office') ? 'office-class' : ''">item.type</div>
+                                <div class="room__levels" v-if="item.levels"><strong>levels:</strong> {{item.levels}}</div>
+                                <div class="room__floor" v-if="item.roomFloor!=='none'"><strong>floor:</strong> {{item.roomFloor}}</div>
+                                <div class="room__status" v-if="item.repair" :class="'repair-class'">repair</div>
+                                <div class="room__type" :class="(item.type == 'office') ? 'office-class' : ''">{{item.type}}</div>
                             </div>
                         </div>
-                    </div>
 
                 </div>
             </section>
@@ -47,17 +43,22 @@
                 </header>
 
                 <div class="rooms">
-                    <div class="room" v-for="(item, index) in listRooms" :key="index">
-                        <div class="room__img"><img src="http://hai-nyzhnyk.in.ua/test/room.png" alt=""></div>
+                    <div class="room" v-for="(item, index) in listRooms.slice(0, 3)" :key="index">
+                        <div class="room__img"><img src="http://hai-nyzhnyk.in.ua/test/room.png" alt="Rooms"></div>
                         <div class="room__info">
-                            <div class="room__title">Room {{item.number}}</div>
-                            <div class="room__description">{{item.description()}}</div>
-                            <div class="room__area"><strong>area:</strong> {{item.area}} m<sup>2</sup></div>
-                            <div class="room__levels"><strong>levels:</strong> {{item.levels}}</div>
-                            <div class="room__floor" v-if="isFloor()"><strong>floor:</strong> {{item.floor()}}</div>
-                            <div class="room__type" :class="(item.type == 'office') ? 'office-class' : ''">item.type</div>
+                            <div class="room__info--block">
+                                <div class="room__title">Room {{item.number}}</div>
+                                <div class="room__description">{{item.description}}</div>
+                                <div class="room__area"><strong>area:</strong> {{item.area}} m<sup>2</sup></div>
+                                <div class="room__levels" v-if="item.levels"><strong>levels:</strong> {{item.levels}}</div>
+                                <div class="room__floor" v-if="item.roomFloor!=='none'"><strong>floor:</strong> {{item.roomFloor}}</div>
+                                <div class="room__type"> <strong>type:</strong> {{item.type}}</div>
+                                <div class="room__type" v-if="item.repair"><strong>status:</strong> repair</div>
+                            </div>
+                            <div class="room__link"><a href="#">read more</a></div>
                         </div>
                     </div>
+                    <div class="rooms__all"><a href="#">All rooms</a></div>
                 </div>
 
             </section>

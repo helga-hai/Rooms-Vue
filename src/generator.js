@@ -1,4 +1,3 @@
-console.log('generator.js')
 
 export default function Room() {
 
@@ -7,38 +6,35 @@ export default function Room() {
 
     const _firstNumber = number.toString().split('')[0]
 
-    const levels = (_firstNumber != 9) ? Math.ceil(Math.random() * 2) : 1;
+    const levels = [(_firstNumber != 9) ? Math.ceil(Math.random() * 2) : 1, ''][Math.floor(Math.random() * 2)];
     const area = Math.ceil(Math.random() * 100);
     const repair = [true, false][Math.floor(Math.random() * 2)];
     const type = ['office', 'utility room'][Math.floor(Math.random() * 2)]
 
+    let roomFloor;
 
-    const floor = function() {
-        let val;
+    (number.toString().split('').length == 3) ?
+        roomFloor = _firstNumber:
+            roomFloor = 0;
 
-        (number.toString().split('').length == 3) ?
-        val = _firstNumber:
-            val = 0;
+    if (levels !== 1)
+        roomFloor = '' + roomFloor + '–' + ++roomFloor;
 
-        if (levels !== 1)
-            val = '' + val + '–' + ++val;
+    roomFloor = [roomFloor, 'none'][Math.floor(Math.random() * 2)]
 
-        return [val, 'none'][Math.floor(Math.random() * 2)]
-
+    function _mathFloor(min, max){
+        return Math.floor(Math.random() * (max + 1 - min) + min)
     }
 
-    const description = function() {
-        let val = 'Lorem ipsum dolor sit amet consectetuer adipiscing elit sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat'.split(' ');
-        val.length = Math.floor(Math.random() * 18) + 3
-        return val.join(' ')
-    }
+    const description = 'Lorem ipsum dolor sit amet consectetuer adipiscing elit sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat'.split(' ').slice(0, _mathFloor(3, 20)).join(' ')
+
     return Object.freeze({
         src,
         number,
         description,
         area,
         levels,
-        floor,
+        roomFloor,
         repair,
         type
     });
